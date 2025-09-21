@@ -1,1 +1,1 @@
-# de-warehouse-starter
+![CI](https://github.com/giannis93/de-warehouse-starter/actions/workflows/ci.yml/badge.svg)
