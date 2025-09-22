@@ -46,3 +46,12 @@ lint:
 # 9. Auto-format code with Black
 format:
 	docker compose run --rm loader black .
+
+
+load-sample:
+	# Run schema creation scripts
+	docker exec -i postgres_db psql -U $$DB_USER -d $$DB_NAME < sql/raw/01_create_raw_schema.sql
+	docker exec -i postgres_db psql -U $$DB_USER -d $$DB_NAME < sql/staging/01_create_staging_schema.sql
+	docker exec -i postgres_db psql -U $$DB_USER -d $$DB_NAME < sql/mart/01_create_mart_schema.sql
+	# Run Python seed to load CSVs into raw schema
+	docker compose run --rm loader python src/seed.py
