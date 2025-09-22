@@ -1,0 +1,35 @@
+name: CI                             # Name of the workflow, shows up in GitHub Actions UI
+
+on:                                  # Define when this workflow should run
+  push:                              # Trigger workflow when code is pushed
+    branches: [ main ]               # Only run on pushes to the 'main' branch
+  pull_request:                      # Trigger workflow for pull requests
+    branches: [ main ]               # Only run on PRs targeting 'main'
+
+jobs:                                # Define the jobs that run in the workflow
+  build:                             # Job name 'build'
+    runs-on: ubuntu-latest           # Use the latest Ubuntu VM as the runner environment
+
+    steps:                           # List of steps the runner will execute
+      - name: Checkout repository    # Step 1: Get your repo code onto the runner
+        uses: actions/checkout@v3    # Official GitHub Action to clone the repo
+
+      - name: Set up Python          # Step 2: Install and configure Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"     # Specify the Python version to use
+
+      - name: Install dependencies   # Step 3: Install project dependencies
+        run: |                       # Run shell commands on the runner
+          python -m pip install --upgrade pip   # Upgrade pip to the latest version
+          pip install -r requirements.txt       # Install dependencies from file
+
+      - name: Run linters            # Step 4: Run style/lint checks to ensure clean code
+        run: |
+          pip install flake8                  # Install flake8 linter
+          flake8 .                            # Lint all files in the repo
+
+      - name: Run tests              # Step 5: Run unit tests
+        run: |
+          pip install pytest                  # Install pytest test framework
+          pytest                              # Run all tests

@@ -1,0 +1,9 @@
+[flake8]
+# Set maximum line length
+max-line-length = 120
+
+# Ignore some rules commonly overridden in modern projects
+ignore = E203, W503
+
+# Exclude certain folders from linting
+exclude = venv, .git, __pycache__, build, dist
