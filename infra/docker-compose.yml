@@ -1,4 +1,4 @@
-version: "3.9"                       # Docker Compose file format version
+#version: "3.9"                       # Docker Compose file format version
 
 services:                            # Define services (containers to run)
   postgres:                          # First service: PostgreSQL database
