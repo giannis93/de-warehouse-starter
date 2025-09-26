@@ -2,6 +2,11 @@
 
 ENV_FILE=.env                     # Path to .env file used by Compose/DB
 
+ifneq (,$(wildcard ./.env))
+    include .env
+    export
+endif
+
 # Default target: help
 help:                             # Run `make help` to see target list
 	@echo "Available targets: init, up, down, logs, psql, load-sample, test, lint, format"
@@ -38,7 +43,7 @@ load-sample:
 	docker exec -i postgres_db psql -U $$POSTGRES_USER -d $$POSTGRES_DB < sql/staging/01_create_staging_schema.sql
 	docker exec -i postgres_db psql -U $$POSTGRES_USER -d $$POSTGRES_DB < sql/mart/01_create_mart_schema.sql
 	# Run Python seed
-	docker compose run --rm loader python src/seed.py
+	docker compose -f infra/docker-compose.yml run --rm loader python src/seed.py
 
 # 7. Run smoke tests with pytest
 test:

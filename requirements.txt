@@ -1,2 +1,7 @@
-pandas
-psycopg2-binary
+#sudo apt-get install python-pip
+#sudo apt-get update
+#sudo apt-get install libpq-dev python3
+
+
+pandas                  # pip install pandas                # sudo apt-get install python3-pandas
+psycopg2-binary         # pip install psycopg2-binary       #sudo apt install python3-psycopg2
