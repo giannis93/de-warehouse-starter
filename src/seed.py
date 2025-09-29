@@ -5,13 +5,14 @@ import pandas as pd
 
 def get_conn():
     conn = psycopg2.connect(
-        host=os.getenv("DB_HOST", "localhost"),
-        port=os.getenv("DB_PORT", "5432"),
-        user=os.getenv("DB_USER", "de_user"),
-        password=os.getenv("DB_PASSWORD", "de_pass"),
-        dbname=os.getenv("DB_NAME", "de_warehouse"),
+        host=os.getenv("POSTGRES_HOST") or os.getenv("DB_HOST", "localhost"),
+        port=os.getenv("POSTGRES_PORT") or os.getenv("DB_PORT", "5432"),
+        user=os.getenv("POSTGRES_USER") or os.getenv("DB_USER", "de_user"),
+        password=os.getenv("POSTGRES_PASSWORD") or os.getenv("DB_PASSWORD", "de_pass"),
+        dbname=os.getenv("POSTGRES_DB") or os.getenv("DB_NAME", "de_warehouse"),
     )
     return conn
+
 
 def load_csv_to_table(conn, csv_path, table_name):
     df = pd.read_csv(csv_path)

@@ -1,3 +1,7 @@
-job_id,title
-1001,Software Engineer
-1002,HR Manager
+job_id,job_title,min_salary,max_salary
+1001,Software Engineer,55000,95000
+1002,HR Manager,45000,80000
+1003,Data Analyst,50000,85000
+1004,Project Manager,60000,110000
+1005,DevOps Engineer,65000,105000
+1006,Finance Specialist,48000,78000

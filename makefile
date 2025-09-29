@@ -25,13 +25,13 @@ up:                               # Start stack in detached mode
 	docker compose -f infra/docker-compose.yml up -d
 
 # 3. Stop services and remove containers
-down:                             # Stop containers (keeps volume data)
+down:                             # Stop containers (keeps volume data) (append -v to remove volum data)
 	docker compose -f infra/docker-compose.yml down
 
 # 4. Show logs from containers
 logs:                             # Tail docker-compose logs
 	docker compose -f infra/docker-compose.yml logs -f
-
+	
 # 5. Open psql shell inside the Postgres container
 psql:                             # Open DB shell
 	docker exec -it postgres_db psql -U $$POSTGRES_USER -d $$POSTGRES_DB
@@ -43,7 +43,10 @@ load-sample:
 	docker exec -i postgres_db psql -U $$POSTGRES_USER -d $$POSTGRES_DB < sql/staging/01_create_staging_schema.sql
 	docker exec -i postgres_db psql -U $$POSTGRES_USER -d $$POSTGRES_DB < sql/mart/01_create_mart_schema.sql
 	# Run Python seed
-	docker compose -f infra/docker-compose.yml run --rm loader python src/seed.py
+	# docker compose -f infra/docker-compose.yml run --rm loader python src/seed.py
+	# Run Python seed (override host so loader can connect to postgres container)
+	docker compose -f infra/docker-compose.yml run --rm \
+		-e POSTGRES_HOST=postgres loader python src/seed.py
 
 # 7. Run smoke tests with pytest
 test:
@@ -58,3 +61,12 @@ lint:
 # 9. Auto-format Python code with Black
 format:
 	docker compose run --rm loader black .
+# 10. Build loader image (install Python deps from requirements.txt)
+build-loader:                      # Rebuilds the loader container after changing requirements
+	docker compose -f infra/docker-compose.yml build loader
+
+# 11. Sync local venv deps and rebuild loader (optional combined target)
+deps:                              # Install deps locally & rebuild loader image
+	python3 -m venv .venv || true
+	source .venv/bin/activate && pip install -r requirements.txt
+	docker compose -f infra/docker-compose.yml build loader

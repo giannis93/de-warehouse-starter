@@ -1,7 +1,30 @@
 #sudo apt-get install python-pip
 #sudo apt-get update
 #sudo apt-get install libpq-dev python3
+#-------create virtual environment wsl ---------
+#sudo apt update
+#sudo apt install python3.12-venv -y
+#cd /mnt/c/git/de-warehouse-starter
+#python3 -m venv .venv
+#source .venv/bin/activate
+#pip install -r requirements.txt
+#-------create virtual environment wsl ---------
 
+# pip install pandas                # sudo apt-get install python3-pandas
+# pip install psycopg2-binary       #sudo apt install python3-psycopg2
 
-pandas                  # pip install pandas                # sudo apt-get install python3-pandas
-psycopg2-binary         # pip install psycopg2-binary       #sudo apt install python3-psycopg2
+# --- Core Dependencies ---
+
+psycopg2-binary==2.9.9   # PostgreSQL driver for Python (used by seed.py + tests)
+pandas==2.2.2            # DataFrame library for loading/transforming CSVs before inserting to DB
+
+# --- Dev & Testing Tools ---
+
+pytest==8.3.2            # Python testing framework (for test_smoke.py, CI checks)
+flake8==7.1.1            # Linter for code style / static analysis
+black==24.8.0            # Code formatter (to auto-fix code formatting)
+
+# --- Optional Data Engineering Helpers ---
+
+SQLAlchemy==2.0.34        # ORM / SQL toolkit (handy for more complex DB interactions)
+python-dotenv==1.0.1      # Ensures .env vars can be read in Python scripts if needed
