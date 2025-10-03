@@ -1,0 +1,26 @@
+name: Feature                           # Name shown in the "New issue" UI for this template
+description: Propose a new feature or enhancement  # Short help text under the template name
+title: "feat: "                         # Default title prefix for feature issues
+labels: ["feature"]                     # Default labels applied to issues created from this template
+body:                                   # Form fields that appear when creating an issue
+  - type: textarea                      # Multi-line text field for high-level description
+    id: summary                         # Unique key for this field
+    attributes:                         # Field properties
+      label: Summary                    # Field label shown to the user
+      description: What problem does this feature solve?  # Helper text guiding the input
+      placeholder: Describe the value and outcome.        # Placeholder text inside the field
+  - type: textarea                      # Acceptance criteria field
+    id: acceptance                      # Unique key for acceptance criteria
+    attributes:
+      label: Acceptance criteria        # Label for the field
+      description: Clear, testable conditions of satisfaction. # Guidance for writing criteria
+      placeholder: "Given/When/Then or bullet list"            # Suggested format
+  - type: textarea                      # Design notes field
+    id: design                          # Unique key for design notes
+    attributes:
+      label: Design notes               # Label for the field
+      description: Architecture, data model changes, risks.    # What to include here
+  - type: input                         # Single-line input field
+    id: due                             # Unique key for due date
+    attributes:
+      label: Target due date (YYYY-MM-DD) # Label prompting a standard date format

@@ -1,0 +1,29 @@
+name: Bug                               # Template name for bug reports
+description: Report a defect            # Description shown in the picker
+title: "bug: "                          # Default title prefix for bugs
+labels: ["bug"]                         # Auto-applied label for bug issues
+body:                                   # Fields shown to the reporter
+  - type: textarea                      # Bug description field
+    id: desc                            # Unique key for description
+    attributes:
+      label: Describe the bug           # Field label
+      placeholder: What happened vs expected? # Prompt for details
+  - type: textarea                      # Reproduction steps field
+    id: repro                           # Unique key for repro
+    attributes:
+      label: Steps to reproduce         # Field label
+      placeholder: 1) ... 2) ... 3) ... # Suggest enumerated steps
+  - type: textarea                      # Logs/stack traces field
+    id: logs                            # Unique key for logs
+    attributes:
+      label: Logs/stacktrace            # Field label
+      render: shell                     # Render logs with shell formatting
+  - type: input                         # Due date field for fix target
+    id: due                             # Unique key for due date
+    attributes:
+      label: Target fix date (YYYY-MM-DD) # Prompt for date format
+  - type: dropdown                      # Severity selection field
+    id: severity                        # Unique key for severity
+    attributes:
+      label: Severity                   # Field label
+      options: ["blocker", "critical", "major", "minor"] # Allowed options

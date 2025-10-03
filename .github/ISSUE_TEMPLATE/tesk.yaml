@@ -1,0 +1,19 @@
+name: Task                              # Template name for tasks
+description: A scoped, actionable task  # Shown in the template picker
+title: "task: "                         # Default title prefix for tasks
+labels: ["task"]                        # Label applied automatically
+body:                                   # Form definition
+  - type: textarea                      # Main work description field
+    id: work                            # Unique ID for this field
+    attributes:
+      label: Work description           # Field label
+      placeholder: Outline steps or checklist. # Hint about content style
+  - type: textarea                      # Context and links field
+    id: context                         # Unique ID for context field
+    attributes:
+      label: Context/links              # Field label
+      placeholder: Related PRs, docs, tickets. # What to include here
+  - type: input                         # Due date field
+    id: due                             # Unique ID for due date
+    attributes:
+      label: Target due date (YYYY-MM-DD) # Prompt for date entry

@@ -51,9 +51,9 @@ load-sample:
 # 7. Run smoke tests with pytest
 test:
 	# Run inside Compose network (most consistent):
-	# POSTGRES_HOST=postgres docker compose -f infra/docker-compose.yml run --rm loader python tests/test_smoke.py -q
+	 POSTGRES_HOST=postgres docker compose -f infra/docker-compose.yml run --rm loader python tests/test_smoke.py -q
 	# Run inside Compose network (most consistent):
-	 POSTGRES_HOST=localhost docker compose -f infra/docker-compose.yml run --rm loader python -m pytest tests/test_smoke.py -q
+	# POSTGRES_HOST=localhost docker compose -f infra/docker-compose.yml run --rm loader python -m pytest tests/test_smoke.py -q
 	# In CI (GitHub Actions): override with POSTGRES_HOST=postgres
 
 # 8. Run linter with flake8
